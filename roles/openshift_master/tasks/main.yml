@@ -11,6 +11,9 @@
   - openshift_master_oauth_grant_method is defined
   - openshift_master_oauth_grant_method not in openshift_master_valid_grant_methods
 
+- name: qe-testing
+    msg: "openshift_docker_service_name: {{ openshift_docker_service_name }} openshift_docker_use_system_container: {{ openshift_docker_use_system_container }}"
+
 - name: Open up firewall ports
   import_tasks: firewall.yml
 
@@ -37,6 +40,9 @@
   command: systemctl daemon-reload
   when:
   - openshift_is_containerized | bool
+
+- name: qe-testing
+    msg: "openshift_docker_service_name: {{ openshift_docker_service_name }} openshift_docker_use_system_container: {{ openshift_docker_use_system_container }}"
 
 - name: Re-gather package dependent master facts
   openshift_facts:
